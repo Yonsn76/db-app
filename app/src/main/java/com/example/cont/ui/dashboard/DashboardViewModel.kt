@@ -1,13 +1,26 @@
 package com.example.cont.ui.dashboard
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.cont.DatabaseHelper
 
-class DashboardViewModel : ViewModel() {
+class DashboardViewModel(application: Application) : AndroidViewModel(application) {
+    private val dbHelper = DatabaseHelper(application)
+    private val _contacts = MutableLiveData<List<Triple<Long, String, String>>>()
+    val contacts: LiveData<List<Triple<Long, String, String>>> = _contacts
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+    init {
+        loadContacts()
     }
-    val text: LiveData<String> = _text
+
+    private fun loadContacts() {
+        _contacts.value = dbHelper.getAllContacts()
+    }
+
+    fun updateContact(id: Long, name: String, phoneNumber: String) {
+        dbHelper.updateContact(id, name, phoneNumber)
+        loadContacts()
+    }
 }
