@@ -1,11 +1,15 @@
 package com.example.cont.ui.dashboard
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cont.databinding.ItemContactBinding
+import com.example.cont.databinding.VentanitaEditarBinding
+import com.example.cont.R
 
 class ContactAdapter(private val onContactUpdated: (Long, String, String) -> Unit) :
     ListAdapter<Triple<Long, String, String>, ContactAdapter.ContactViewHolder>(ContactDiffCallback()) {
@@ -23,13 +27,33 @@ class ContactAdapter(private val onContactUpdated: (Long, String, String) -> Uni
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(contact: Triple<Long, String, String>) {
-            binding.editTextName.setText(contact.second)
-            binding.editTextPhoneNumber.setText(contact.third)
-            binding.buttonSave.setOnClickListener {
-                val updatedName = binding.editTextName.text.toString()
-                val updatedPhoneNumber = binding.editTextPhoneNumber.text.toString()
-                onContactUpdated(contact.first, updatedName, updatedPhoneNumber)
+            binding.textViewName.text = contact.second
+            binding.textViewPhoneNumber.text = contact.third
+            
+            binding.buttonEdit.setOnClickListener {
+                showEditDialog(contact)
             }
+        }
+
+        private fun showEditDialog(contact: Triple<Long, String, String>) {
+            val context = binding.root.context
+            val dialogBinding = VentanitaEditarBinding.inflate(LayoutInflater.from(context))
+            
+            dialogBinding.editTextName.setText(contact.second)
+            dialogBinding.editTextPhoneNumber.setText(contact.third)
+
+            AlertDialog.Builder(context)
+                .setTitle("Editar Contacto")
+                .setView(dialogBinding.root)
+                .setPositiveButton("Guardar") { _: DialogInterface, _: Int ->
+                    val newName = dialogBinding.editTextName.text.toString()
+                    val newPhone = dialogBinding.editTextPhoneNumber.text.toString()
+                    if (newName.isNotEmpty() && newPhone.isNotEmpty()) {
+                        onContactUpdated(contact.first, newName, newPhone)
+                    }
+                }
+                .setNegativeButton("Cancelar", null)
+                .show()
         }
     }
 
