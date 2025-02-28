@@ -10,6 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.cardview.widget.CardView
 import com.example.cont.DatabaseHelper
 import com.example.cont.databinding.FragmentHomeBinding
+import android.app.AlertDialog
+import android.widget.EditText
+import com.example.cont.R
+import android.content.DialogInterface
 
 class HomeFragment : Fragment() {
 
@@ -62,9 +66,15 @@ class HomeFragment : Fragment() {
     }
     
     private fun formatPhoneNumber(number: String): String {
-        if (number.length <= 3) return number
-        if (number.length <= 7) return "${number.substring(0, 3)}-${number.substring(3)}"
-        return "${number.substring(0, 3)}-${number.substring(3, 6)}-${number.substring(6, number.length.coerceAtMost(15))}"
+        // Remove any existing formatting
+        val digits = number.replace(Regex("[^0-9]"), "")
+        
+        return when {
+            digits.length <= 3 -> digits
+            digits.length <= 6 -> "${digits.substring(0, 3)}-${digits.substring(3)}"
+            digits.length <= 10 -> "${digits.substring(0, 3)}-${digits.substring(3, 6)}-${digits.substring(6)}"
+            else -> "${digits.substring(0, 3)}-${digits.substring(3, 6)}-${digits.substring(6, 10)}"
+        }
     }
     
     // Add a clear button function
@@ -77,20 +87,35 @@ class HomeFragment : Fragment() {
     private fun setupSaveButton() {
         binding.fabSave.setOnClickListener {
             val phoneNumber = binding.textDisplay.text.toString()
-            val name = binding.editTextName.text.toString()
-    
-            if (phoneNumber.isNotEmpty() && name.isNotEmpty()) {
-                val id = dbHelper.addContact(name, phoneNumber)
-                if (id != -1L) {
-                    Toast.makeText(context, "Contacto guardado: $name - $phoneNumber", Toast.LENGTH_SHORT).show()
-                    binding.textDisplay.text = ""
-                    binding.editTextName.text.clear()
-                } else {
-                    Toast.makeText(context, "Error al guardar el contacto", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(context, "Por favor, ingrese nombre y número", Toast.LENGTH_SHORT).show()
+            
+            if (phoneNumber.isEmpty()) {
+                Toast.makeText(context, "Por favor, ingrese un número", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            val builder = AlertDialog.Builder(requireContext())
+            val dialogView = layoutInflater.inflate(R.layout.ventanita_nombre, null)
+            val nameInput = dialogView.findViewById<EditText>(R.id.editTextDialogName)
+
+            builder.setTitle("Guardar Contacto")
+                .setView(dialogView)
+                .setPositiveButton("Guardar") { _: DialogInterface, _ ->
+                    val name = nameInput.text.toString()
+
+                    if (name.isNotEmpty()) {
+                        val id = dbHelper.addContact(name, phoneNumber)
+                        if (id != -1L) {
+                            Toast.makeText(context, "Contacto guardado: $name - $phoneNumber", Toast.LENGTH_SHORT).show()
+                            binding.textDisplay.text = ""
+                        } else {
+                            Toast.makeText(context, "Error al guardar el contacto", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(context, "Por favor, ingrese un nombre", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .setNegativeButton("Cancelar") { _: DialogInterface, _ -> }
+                .show()
         }
     }
     
