@@ -17,7 +17,7 @@
         android:id="@+id/editTextPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Número de teléfono"
+        android:hint="Número de celular"
         android:inputType="phone" />
 
 </LinearLayout>

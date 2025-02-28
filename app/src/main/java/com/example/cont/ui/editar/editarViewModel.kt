@@ -1,4 +1,4 @@
-package com.example.cont.ui.dashboard
+package com.example.cont.ui.editar
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.cont.DatabaseHelper
 
-class DashboardViewModel(application: Application) : AndroidViewModel(application) {
+class editarViewModel(application: Application) : AndroidViewModel(application) {
     private val dbHelper = DatabaseHelper(application)
     private val _contacts = MutableLiveData<List<Triple<Long, String, String>>>()
     val contacts: LiveData<List<Triple<Long, String, String>>> = _contacts

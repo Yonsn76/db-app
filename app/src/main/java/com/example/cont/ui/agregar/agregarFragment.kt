@@ -1,4 +1,4 @@
-package com.example.cont.ui.home
+package com.example.cont.ui.agregar
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +15,7 @@ import android.widget.EditText
 import com.example.cont.R
 import android.content.DialogInterface
 
-class HomeFragment : Fragment() {
+class agregarFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!

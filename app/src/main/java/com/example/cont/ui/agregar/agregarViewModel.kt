@@ -1,10 +1,10 @@
-package com.example.cont.ui.home
+package com.example.cont.ui.agregar
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class agregarViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = ""

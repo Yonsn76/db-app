@@ -3,4 +3,10 @@
     <string name="title_home">Agregar Numero</string>
     <string name="title_dashboard">editar</string>
     <string name="title_notifications">Borrar</string>
+    <string name="delete_all_confirmation_title">Eliminar todos los contactos</string>
+    <string name="delete_all_confirmation_message">¿Estás seguro de que quieres eliminar todos los contactos? Esta acción no se puede deshacer.</string>
+    <string name="delete_confirmation_title">Eliminar contacto</string>
+    <string name="delete_confirmation_message">¿Estás seguro de que quieres eliminar este contacto? Esta acción no se puede deshacer.</string>
+    <string name="delete">Eliminar</string>
+    <string name="cancel">Cancelar</string>
 </resources>

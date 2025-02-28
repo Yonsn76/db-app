@@ -1,4 +1,4 @@
-package com.example.cont.ui.dashboard
+package com.example.cont.ui.editar
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cont.databinding.FragmentDashboardBinding
 
-class DashboardFragment : Fragment() {
+class editarFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: DashboardViewModel
+    private lateinit var viewModel: editarViewModel
     private lateinit var contactAdapter: ContactAdapter
 
     override fun onCreateView(
@@ -27,7 +27,7 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(editarViewModel::class.java)
         setupRecyclerView()
         observeViewModel()
     }

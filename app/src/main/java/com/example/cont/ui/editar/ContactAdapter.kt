@@ -1,4 +1,4 @@
-package com.example.cont.ui.dashboard
+package com.example.cont.ui.editar
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cont.databinding.ItemContactBinding
 import com.example.cont.databinding.VentanitaEditarBinding
-import com.example.cont.R
 
 class ContactAdapter(private val onContactUpdated: (Long, String, String) -> Unit) :
     ListAdapter<Triple<Long, String, String>, ContactAdapter.ContactViewHolder>(ContactDiffCallback()) {
