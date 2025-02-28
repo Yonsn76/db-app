@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Outer glow -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#800033FF" />
+            <size android:height="4dp" />
+        </shape>
+    </item>
+    
+    <!-- Inner glow -->
+    <item android:top="1dp" android:bottom="1dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#FF0033FF" />
+            <size android:height="2dp" />
+        </shape>
+    </item>
+</layer-list>
