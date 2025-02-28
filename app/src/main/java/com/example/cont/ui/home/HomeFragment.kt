@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
 
         setupNumberButtons()
         setupSaveButton()
+        setupClearButton()
 
         return root
     }
@@ -41,17 +42,43 @@ class HomeFragment : Fragment() {
                 child.setOnClickListener {
                     val textView = child.getChildAt(0) as TextView
                     val number = textView.text.toString()
-                    appendNumber(number)
+                    if (isValidPhoneNumberInput(number)) {
+                        appendNumber(number)
+                    }
                 }
             }
         }
     }
 
+    private fun isValidPhoneNumberInput(number: String): Boolean {
+        val currentText = binding.textDisplay.text.toString()
+        return currentText.length < 15 // Limit phone number length
+    }
+    
+    private fun appendNumber(number: String) {
+        val currentText = binding.textDisplay.text.toString()
+        val formattedNumber = formatPhoneNumber(currentText + number)
+        binding.textDisplay.text = formattedNumber
+    }
+    
+    private fun formatPhoneNumber(number: String): String {
+        if (number.length <= 3) return number
+        if (number.length <= 7) return "${number.substring(0, 3)}-${number.substring(3)}"
+        return "${number.substring(0, 3)}-${number.substring(3, 6)}-${number.substring(6, number.length.coerceAtMost(15))}"
+    }
+    
+    // Add a clear button function
+    private fun setupClearButton() {
+        binding.buttonClear?.setOnClickListener {
+            binding.textDisplay.text = ""
+        }
+    }
+    
     private fun setupSaveButton() {
         binding.fabSave.setOnClickListener {
             val phoneNumber = binding.textDisplay.text.toString()
             val name = binding.editTextName.text.toString()
-
+    
             if (phoneNumber.isNotEmpty() && name.isNotEmpty()) {
                 val id = dbHelper.addContact(name, phoneNumber)
                 if (id != -1L) {
@@ -66,12 +93,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
-    private fun appendNumber(number: String) {
-        val currentText = binding.textDisplay.text.toString()
-        binding.textDisplay.text = currentText + number
-    }
-
+    
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
