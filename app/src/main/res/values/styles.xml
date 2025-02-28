@@ -15,6 +15,16 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowMinWidthMajor">90%</item>
         <item name="android:windowMinWidthMinor">90%</item>
-        <item name="colorAccent">#00FFFF</item>
+        <item name="colorAccent">#0033FF</item>
+    </style>
+    
+    <!-- Futuristic dialog theme - Green variant -->
+    <style name="FuturisticDialogTheme.Green" parent="FuturisticDialogTheme">
+        <item name="colorAccent">#33FF33</item>
+    </style>
+    
+    <!-- Futuristic dialog theme - Red variant -->
+    <style name="FuturisticDialogTheme.Red" parent="FuturisticDialogTheme">
+        <item name="colorAccent">#FF3333</item>
     </style>
 </resources>

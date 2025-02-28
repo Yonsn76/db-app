@@ -3,7 +3,7 @@
     <!-- Outer glow -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#600033FF" />
+            <solid android:color="#6033FF33" />
             <corners android:radius="8dp" />
         </shape>
     </item>
@@ -11,7 +11,7 @@
     <!-- Middle glow -->
     <item android:left="1dp" android:top="1dp" android:right="1dp" android:bottom="1dp">
         <shape android:shape="rectangle">
-            <solid android:color="#400033FF" />
+            <solid android:color="#4033FF33" />
             <corners android:radius="7dp" />
         </shape>
     </item>
@@ -19,7 +19,7 @@
     <!-- Inner glow -->
     <item android:left="3dp" android:top="3dp" android:right="3dp" android:bottom="3dp">
         <shape android:shape="rectangle">
-            <solid android:color="#800033FF" />
+            <solid android:color="#8033FF33" />
             <corners android:radius="5dp" />
         </shape>
     </item>
@@ -27,8 +27,8 @@
     <!-- Main background -->
     <item android:left="5dp" android:top="5dp" android:right="5dp" android:bottom="5dp">
         <shape android:shape="rectangle">
-            <solid android:color="#CC000A2A" />
-            <stroke android:color="#FF0033FF" android:width="2dp" />
+            <solid android:color="#CC0A2A0A" />
+            <stroke android:color="#FF33FF33" android:width="2dp" />
             <corners android:radius="3dp" />
         </shape>
     </item>

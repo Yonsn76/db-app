@@ -27,4 +27,8 @@ class borrarViewModel(application: Application) : AndroidViewModel(application) 
     fun refreshContacts() {
         _contacts.value = dbHelper.getAllContacts()
     }
+    
+    fun getContactById(id: Long): Triple<Long, String, String>? {
+        return _contacts.value?.find { it.first == id }
+    }
 }

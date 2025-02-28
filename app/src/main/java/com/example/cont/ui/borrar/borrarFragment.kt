@@ -1,10 +1,15 @@
 package com.example.cont.ui.borrar
 
+import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -13,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cont.R
 import com.example.cont.databinding.FragmentBorrarBinding
+import com.example.cont.databinding.VentanitaEliminarBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class borrarFragment : Fragment() {
@@ -63,14 +69,65 @@ class borrarFragment : Fragment() {
         if (!isAdded || context == null) return
 
         try {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.delete_confirmation_title)
-                .setMessage(R.string.delete_confirmation_message)
-                .setPositiveButton(R.string.delete) { _, _ ->
-                    deleteContact(contactId)
+            // Obtener información del contacto
+            val contact = viewModel.getContactById(contactId)
+            if (contact != null) {
+                // Usar el diálogo futurista rojo
+                val dialogBinding = VentanitaEliminarBinding.inflate(layoutInflater)
+                
+                // Configurar el texto de confirmación con el nombre del contacto
+                dialogBinding.textViewContactToDelete.text = "${contact.second} - ${contact.third}"
+                
+                // Crear el diálogo personalizado
+                val dialog = Dialog(requireContext(), R.style.FuturisticDialogTheme_Red)
+                dialog.setContentView(dialogBinding.root)
+                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                
+                // Agregar botones programáticamente
+                val buttonContainer = dialogBinding.buttonContainerDelete
+                
+                // Botón Eliminar
+                val deleteButton = Button(requireContext()).apply {
+                    text = "ELIMINAR"
+                    setTextColor(Color.parseColor("#FF3333"))
+                    setBackgroundColor(Color.TRANSPARENT)
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    ).apply {
+                        gravity = Gravity.END
+                        marginEnd = 16
+                    }
+                    setOnClickListener {
+                        deleteContact(contactId)
+                        dialog.dismiss()
+                    }
                 }
-                .setNegativeButton(R.string.cancel, null)
-                .show()
+                
+                // Botón Cancelar
+                val cancelButton = Button(requireContext()).apply {
+                    text = "CANCELAR"
+                    setTextColor(Color.WHITE)
+                    setBackgroundColor(Color.TRANSPARENT)
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    ).apply {
+                        gravity = Gravity.END
+                    }
+                    setOnClickListener {
+                        dialog.dismiss()
+                    }
+                }
+                
+                // Agregar botones al contenedor
+                buttonContainer.addView(cancelButton)
+                buttonContainer.addView(deleteButton)
+                
+                dialog.show()
+            } else {
+                showError("No se pudo encontrar el contacto")
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             showError("Error al mostrar el diálogo de eliminación")

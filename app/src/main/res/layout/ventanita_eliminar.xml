@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:src="@drawable/lineas_notificacion_verde"
+        android:src="@drawable/lineas_notificacion_rojo"
         android:scaleType="fitXY" />
 
     <!-- Bottom glowing line -->
@@ -18,16 +18,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:src="@drawable/lineas_notificacion_verde"
+        android:src="@drawable/lineas_notificacion_rojo"
         android:scaleType="fitXY" />
 
     <!-- Main notification container -->
     <LinearLayout
-        android:id="@+id/notification_container_edit"
+        android:id="@+id/notification_container_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:background="@drawable/fondo_notificacion_verde"
+        android:background="@drawable/fondo_notificacion_rojo"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -42,66 +42,51 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/alerta_verde"
+                android:src="@drawable/alerta_rojo"
                 android:layout_marginEnd="8dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EDITAR CONTACTO"
-                android:textColor="#33FF33"
+                android:text="ELIMINAR CONTACTO"
+                android:textColor="#FF3333"
                 android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <!-- Notification content -->
         <TextView
+            android:id="@+id/textViewDeleteConfirmation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:gravity="center"
-            android:text="Modifique los datos del contacto"
+            android:text="¿Está seguro que desea eliminar este contacto?"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
-        <!-- Input fields -->
-        <EditText
-            android:id="@+id/editTextName"
+        <!-- Contact info to be deleted -->
+        <TextView
+            android:id="@+id/textViewContactToDelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre"
-            android:textColorHint="#80FAFAFA"
+            android:gravity="center"
             android:textColor="#FFFFFF"
-            android:inputType="textPersonName"
-            android:maxLines="1"
-            android:background="#40006600"
-            android:padding="8dp"
-            android:layout_marginBottom="8dp" />
-
-        <EditText
-            android:id="@+id/editTextPhoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Número de celular"
-            android:textColorHint="#80FAFAFA"
-            android:textColor="#FFFFFF"
-            android:inputType="phone"
-            android:maxLines="1"
-            android:background="#40006600"
-            android:padding="8dp"
-            android:layout_marginTop="8dp" />
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
 
         <!-- Button container -->
         <LinearLayout
-            android:id="@+id/buttonContainerEdit"
+            android:id="@+id/buttonContainerDelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="end"
             android:layout_marginTop="16dp">
             
-            <!-- Save and Cancel buttons will be added programmatically -->
+            <!-- Confirm and Cancel buttons will be added programmatically -->
             
         </LinearLayout>
 

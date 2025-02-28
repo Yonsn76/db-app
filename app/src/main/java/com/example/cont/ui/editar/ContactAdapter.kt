@@ -1,9 +1,14 @@
 package com.example.cont.ui.editar
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.DialogInterface
+import android.graphics.Color
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -41,18 +46,57 @@ class ContactAdapter(private val onContactUpdated: (Long, String, String) -> Uni
             dialogBinding.editTextName.setText(contact.second)
             dialogBinding.editTextPhoneNumber.setText(contact.third)
 
-            AlertDialog.Builder(context)
-                .setTitle("Editar Contacto")
-                .setView(dialogBinding.root)
-                .setPositiveButton("Guardar") { _: DialogInterface, _: Int ->
+            // Usar diálogo personalizado en lugar de AlertDialog
+            val dialog = Dialog(context, com.example.cont.R.style.FuturisticDialogTheme_Green)
+            dialog.setContentView(dialogBinding.root)
+            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+            
+            // Agregar botones programáticamente
+            val buttonContainer = dialogBinding.buttonContainerEdit
+            
+            // Botón Guardar
+            val saveButton = Button(context).apply {
+                text = "GUARDAR"
+                setTextColor(Color.parseColor("#33FF33"))
+                setBackgroundColor(Color.TRANSPARENT)
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    gravity = Gravity.END
+                    marginEnd = 16
+                }
+                setOnClickListener {
                     val newName = dialogBinding.editTextName.text.toString()
                     val newPhone = dialogBinding.editTextPhoneNumber.text.toString()
                     if (newName.isNotEmpty() && newPhone.isNotEmpty()) {
                         onContactUpdated(contact.first, newName, newPhone)
+                        dialog.dismiss()
                     }
                 }
-                .setNegativeButton("Cancelar", null)
-                .show()
+            }
+            
+            // Botón Cancelar
+            val cancelButton = Button(context).apply {
+                text = "CANCELAR"
+                setTextColor(Color.WHITE)
+                setBackgroundColor(Color.TRANSPARENT)
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    gravity = Gravity.END
+                }
+                setOnClickListener {
+                    dialog.dismiss()
+                }
+            }
+            
+            // Agregar botones al contenedor
+            buttonContainer.addView(cancelButton)
+            buttonContainer.addView(saveButton)
+            
+            dialog.show()
         }
     }
 
