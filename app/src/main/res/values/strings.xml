@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">cont</string>
+    <string name="app_name">Guardar contactos</string>
     <string name="title_home">Agregar Numero</string>
     <string name="title_dashboard">editar</string>
     <string name="title_notifications">Borrar</string>
