@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F0F0"
     tools:context=".ui.agregar.agregarFragment">
 
     <TextView
@@ -286,7 +285,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="172dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
+        android:background="@drawable/button_border_red"
         android:contentDescription="Botón de inicio"
         android:padding="0dp"
         android:scaleType="fitCenter"

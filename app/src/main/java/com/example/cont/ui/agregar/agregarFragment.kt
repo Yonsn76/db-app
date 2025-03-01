@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.cardview.widget.CardView
 import com.example.cont.DatabaseHelper
-import com.example.cont.databinding.FragmentHomeBinding
+import com.example.cont.databinding.FragmentAgregarBinding
 import android.widget.EditText
 import com.example.cont.R
 import android.app.Dialog
@@ -20,7 +20,7 @@ import android.view.Gravity
 
 class agregarFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentAgregarBinding? = null
     private val binding get() = _binding!!
     private lateinit var dbHelper: DatabaseHelper
 
@@ -29,7 +29,7 @@ class agregarFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentAgregarBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         dbHelper = DatabaseHelper(requireContext())

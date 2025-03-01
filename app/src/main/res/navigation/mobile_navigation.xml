@@ -9,13 +9,13 @@
         android:id="@+id/navigation_home"
         android:name="com.example.cont.ui.agregar.agregarFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_agregar" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.cont.ui.editar.editarFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_editar" />
 
     <fragment
         android:id="@+id/navigation_notifications"
