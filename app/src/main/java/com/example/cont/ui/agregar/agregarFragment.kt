@@ -8,7 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.cardview.widget.CardView
-import com.example.cont.DatabaseHelper
+import androidx.fragment.app.activityViewModels
 import com.example.cont.databinding.FragmentAgregarBinding
 import android.widget.EditText
 import com.example.cont.R
@@ -17,12 +17,13 @@ import android.graphics.Color
 import android.widget.Button
 import android.widget.LinearLayout
 import android.view.Gravity
+import com.example.cont.ui.ContactsViewModel
 
 class agregarFragment : Fragment() {
 
     private var _binding: FragmentAgregarBinding? = null
     private val binding get() = _binding!!
-    private lateinit var dbHelper: DatabaseHelper
+    private val viewModel: ContactsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +33,7 @@ class agregarFragment : Fragment() {
         _binding = FragmentAgregarBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        dbHelper = DatabaseHelper(requireContext())
+        // Initialize view
 
         setupNumberButtons()
         setupSaveButton()
@@ -125,7 +126,7 @@ class agregarFragment : Fragment() {
                 setOnClickListener {
                     val name = nameInput.text.toString()
                     if (name.isNotEmpty()) {
-                        val id = dbHelper.addContact(name, phoneNumber)
+                        val id = viewModel.addContact(name, phoneNumber)
                         if (id != -1L) {
                             Toast.makeText(
                                 context,
